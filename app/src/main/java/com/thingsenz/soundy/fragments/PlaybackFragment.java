@@ -2,26 +2,44 @@ package com.thingsenz.soundy.fragments;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.graphics.ColorFilter;
 import android.graphics.LightingColorFilter;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.v4.app.DialogFragment;
+
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AbsoluteLayout;
+import android.widget.FrameLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.melnykov.fab.FloatingActionButton;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.thingsenz.soundy.R;
 import com.thingsenz.soundy.RecordingItem;
+import com.thingsenz.soundy.ui.PlayerVisualizerView;
 
+
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+
 
 public class PlaybackFragment extends DialogFragment {
 
@@ -31,6 +49,7 @@ public class PlaybackFragment extends DialogFragment {
     private RecordingItem item;
 
     private Handler mHandler = new Handler();
+    private PlayerVisualizerView playerVisualizerView;
 
     private MediaPlayer mMediaPlayer = null;
 
@@ -84,6 +103,9 @@ public class PlaybackFragment extends DialogFragment {
         mFileNameTextView = (TextView) view.findViewById(R.id.file_name_text_view);
         mFileLengthTextView = (TextView) view.findViewById(R.id.file_length_text_view);
         mCurrentProgressTextView = (TextView) view.findViewById(R.id.current_progress_text_view);
+        playerVisualizerView=view.findViewById(R.id.visualizer);
+
+        playerVisualizerView.updateVisualizer(fileToBytes(new File(item.getFilePath())));
 
         mSeekBar = (SeekBar) view.findViewById(R.id.seekbar);
         ColorFilter filter = new LightingColorFilter
@@ -155,6 +177,20 @@ public class PlaybackFragment extends DialogFragment {
 
     }
 
+    public static byte[] fileToBytes(File file) {
+        int size = (int) file.length();
+        byte[] bytes = new byte[size];
+        try {
+            BufferedInputStream buf = new BufferedInputStream(new FileInputStream(file));
+            buf.read(bytes, 0, bytes.length);
+            buf.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bytes;
+    }
 
     @Override
     public void onStart() {
@@ -302,6 +338,7 @@ public class PlaybackFragment extends DialogFragment {
 
                 int mCurrentPosition = mMediaPlayer.getCurrentPosition();
                 mSeekBar.setProgress(mCurrentPosition);
+                playerVisualizerView.updatePlayerPercent((float)mCurrentPosition/mSeekBar.getMax());
 
                 long minutes = TimeUnit.MILLISECONDS.toMinutes(mCurrentPosition);
                 long seconds = TimeUnit.MILLISECONDS.toSeconds(mCurrentPosition)
@@ -316,6 +353,8 @@ public class PlaybackFragment extends DialogFragment {
     private void updateSeekBar() {
         mHandler.postDelayed(mRunnable, 1000);
     }
+
+
 
 
 }

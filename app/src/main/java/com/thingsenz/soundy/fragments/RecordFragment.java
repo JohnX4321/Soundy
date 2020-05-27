@@ -1,22 +1,36 @@
 package com.thingsenz.soundy.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.Handler;
 import android.os.SystemClock;
-import android.support.v4.app.Fragment;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Chronometer;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.melnykov.fab.FloatingActionButton;
+
+
+
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+
+import com.github.ybq.android.spinkit.style.DoubleBounce;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.thingsenz.soundy.MySharedPreferences;
 import com.thingsenz.soundy.R;
 import com.thingsenz.soundy.RecordingService;
+import com.thingsenz.soundy.ui.RecorderVisualizerView;
 
 import java.io.File;
 
@@ -27,6 +41,7 @@ public class RecordFragment extends Fragment {
     private static final String LOG_TAG = RecordFragment.class.getSimpleName();
 
     private int position;
+    public static final String VIZ_ACTION="com.thingsenz.soundy.updateVisualizer";
 
     //Recording controls
     private FloatingActionButton mRecordButton = null;
@@ -38,7 +53,21 @@ public class RecordFragment extends Fragment {
     private boolean mStartRecording = true;
     private boolean mPauseRecording = true;
 
+    private RecorderVisualizerView recorderVisualizerView;
+
     private Chronometer mChronometer = null;
+    public boolean isRec=false;
+
+    BroadcastReceiver broadcastReceiver=new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateViz(intent.getIntExtra("AMP",0));
+        }
+    };
+
+
+
+    public static final int REPEAT_INTERVAL=40;
     long timeWhenPaused = 0; //stores time when user clicks pause button
 
     /**
@@ -56,6 +85,8 @@ public class RecordFragment extends Fragment {
         return f;
     }
 
+    boolean wavFormat;
+
     public RecordFragment() {
     }
 
@@ -63,6 +94,7 @@ public class RecordFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         position = getArguments().getInt(ARG_POSITION);
+        wavFormat= MySharedPreferences.getPrefWavFormat(getActivity().getApplicationContext());
     }
 
     @Override
@@ -74,19 +106,25 @@ public class RecordFragment extends Fragment {
         //update recording prompt text
         mRecordingPrompt = (TextView) recordView.findViewById(R.id.recording_status_text);
 
+        recorderVisualizerView=recordView.findViewById(R.id.recordVisualizer);
         mRecordButton = (FloatingActionButton) recordView.findViewById(R.id.btnRecord);
-        mRecordButton.setColorNormal(getResources().getColor(R.color.primary));
-        mRecordButton.setColorPressed(getResources().getColor(R.color.primary_dark));
+        //mRecordButton.setColorNormal(getResources().getColor(R.color.primary));
+        //mRecordButton.setColorPressed(getResources().getColor(R.color.primary_dark));
         mRecordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 onRecord(mStartRecording);
                 mStartRecording = !mStartRecording;
-            }
+                if (mStartRecording) {
+                    mRecordButton.setBackgroundColor(ContextCompat.getColor(getContext(), R.color.primary_dark));
+                }
+                else
+                {   mRecordButton.setBackgroundColor(ContextCompat.getColor(getContext(),R.color.primary));
+            }}
         });
 
         mPauseButton = (Button) recordView.findViewById(R.id.btnPause);
-        mPauseButton.setVisibility(View.GONE); //hide pause button before recording starts
+        mPauseButton.setVisibility(View.VISIBLE); //hide pause button before recording starts
         mPauseButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -94,6 +132,9 @@ public class RecordFragment extends Fragment {
                 mPauseRecording = !mPauseRecording;
             }
         });
+
+        ProgressBar progressBar=recordView.findViewById(R.id.recordProgressBar);
+        progressBar.setIndeterminateDrawable(new DoubleBounce());
 
         return recordView;
     }
@@ -110,7 +151,7 @@ public class RecordFragment extends Fragment {
             mRecordButton.setImageResource(R.drawable.ic_media_stop);
 
             Toast.makeText(getActivity(),R.string.toast_recording_start,Toast.LENGTH_SHORT).show();
-            File folder = new File(Environment.getExternalStorageDirectory() + "/SoundRecorder");
+            File folder = new File(Environment.getExternalStorageDirectory() + "/Soundy");
             if (!folder.exists()) {
                 //folder /SoundRecorder doesn't exist, create the folder
                 folder.mkdir();
@@ -153,6 +194,8 @@ public class RecordFragment extends Fragment {
             timeWhenPaused=0;
             mRecordingPrompt.setText(getString(R.string.record_prompt));
 
+            recorderVisualizerView.clear();
+
             getActivity().stopService(intent);
 
             getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -169,21 +212,51 @@ public class RecordFragment extends Fragment {
             //pause recording
             mPauseButton.setCompoundDrawablesWithIntrinsicBounds
                     (R.drawable.ic_media_play ,0 ,0 ,0);
+            Intent intent=new Intent(RecordingService.PAUSE_REC);
+            intent.putExtra("MP3",!wavFormat);
+            getActivity().sendBroadcast(intent);
             mRecordingPrompt.setText((String)getString(R.string.resume_recording_button).toUpperCase());
             timeWhenPaused = mChronometer.getBase() - SystemClock.elapsedRealtime();
             mChronometer.stop();
+
         } else {
             //resume recording
             mPauseButton.setCompoundDrawablesWithIntrinsicBounds
                     (R.drawable.ic_media_pause ,0 ,0 ,0);
+            Intent intent=new Intent(RecordingService.RESUME_REC);
+            intent.putExtra("MP3",!wavFormat);
+            getActivity().sendBroadcast(intent);
             mRecordingPrompt.setText((String)getString(R.string.pause_recording_button).toUpperCase());
             mChronometer.setBase(SystemClock.elapsedRealtime() + timeWhenPaused);
             mChronometer.start();
         }
+
+
+
     }
 
     public long status() {
         return System.currentTimeMillis()-mChronometer.getBase();
+    }
+
+    public void updateViz(int max) {
+        recorderVisualizerView.addAmpplitude(max);
+        recorderVisualizerView.invalidate();
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        IntentFilter intentFilter=new IntentFilter();
+        intentFilter.addAction(VIZ_ACTION);
+        getActivity().registerReceiver(broadcastReceiver,intentFilter);
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        getActivity().unregisterReceiver(broadcastReceiver);
     }
 
 }

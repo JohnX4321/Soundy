@@ -2,7 +2,16 @@
 <resources>
     <!-- About -->
     <string name="link">Website: thingsenz.github.io</string>
+    <string name="theme_key">theme</string>
 
+    <string name="ui">UI</string>
+<string name="dark_mode">Dark Mode</string>
+<string name="dark_mode_def_value">MODE_NIGHT_FOLLOW_SYSTEM</string>
+
+    <string name="aar_save">Save</string>
+    <string name="aar_paused">Paused</string>
+    <string name="aar_recording">Recording</string>
+    <string name="aar_playing">Playing</string>
     <!-- Toolbar -->
     <string name="app_name">Soundy</string>
     <string name="action_licenses">Licenses</string>
@@ -38,9 +47,10 @@
     <string name="no_saved_recordings_message">No saved recordings</string>
     <string name="pause_recording_button">Pause</string>
     <string name="resume_recording_button">Resume</string>
-    <string name="default_file_name">My Recording</string>
+    <string name="default_file_name">MyRecording</string>
     <string name="record_prompt">Tap the button to start recording</string>
     <string name="record_in_progress">Recording</string>
+    <string name="settings_title">Settings</string>
 
     <string name="send_to">Send to</string>
 
@@ -51,5 +61,112 @@
     <string name="pref_about_key">pref_about</string>
     <string name="pref_about_title">About</string>
     <string name="pref_about_desc">v%s</string>
+    <string name="start_marker">start</string>
+    <string name="end_marker">end</string>
+    <string name="rewind">rewind</string>
+    <string name="play">play</string>
+    <string name="ffwd">fwd</string>
+    <string name="start_label">start</string>
+    <string name="end_label">end</string>
+
+    <string-array name="dark_mode_entries">
+    <item>Light Mode Selected</item>
+    <item>Dark Mode Selected</item>
+    <item>Auto Battery Dark Mode</item>
+    </string-array>
+
+    <string-array name="dark_mode_values">
+    <item>MODE_NIGHT_NO</item>
+    <item>MODE_NIGHT_YES</item>
+    <item>MODE_NIGHT_AUTO_BATTERY</item>
+    </string-array>
+
+
+
+    <string name="songs">Songs</string>
+    <string name="albums">Albums</string>
+    <string name="artists">Artists</string>
+    <string name="last_added">Last Added</string>
+    <string name="more">MORE</string>
+    <string name="pref_general">General</string>
+    <string name="pref_theme">Design</string>
+    <string name="pref_scan">Scan Files</string>
+    <string name="pref_status_trans">Fully Transparent Statusbar</string>
+    <string name="pref_nav_trans">Fully Transparent Navigationbar</string>
+    <string name="pref_draw_over">Shade over album art</string>
+    <string name="pref_scan_sum">Can\'t find your song? Lets Scan.</string>
+    <string name="pref_gplus_com">Google+ Community</string>
+    <string name="pref_gplus_com_sum">Join the community to share with us your feedback</string>
+    <string name="pref_gplus">Google+ Profile</string>
+    <string name="pref_gplus_sum">Follow developer of this application on Google+</string>
+    <string name="pref_twitter">Twitter</string>
+    <string name="pref_twitter_sum">Follow developer of this application on Twitter</string>
+    <string name="pref_home_view">Home Screen</string>
+    <string name="pref_album_view">Album Screen</string>
+    <string name="pref_player_view">Player Screen</string>
+    <string name="pref_grid_num">Number of Columns</string>
+    <string name="pref_grid_num_sum">For grids</string>
+    <string name="pref_extend_tabs">Extend tabs to fit screen</string>
+    <string name="pref_fast_scroll">Enable Fast Scroll</string>
+    <string name="pref_fast_scroll_sum">Fast Scroll will only appear on long lists</string>
+    <string name="ok">OK</string>
+    <string name="storage_permission">We need Storage permission in order to access songs</string>
+    <string name="playlist">Playlist</string>
+    <string name="shuffle">Shuffle</string>
+    <string name="shuffle_caps">SHUFFLE</string>
+    <string name="play_next">Play Next</string>
+    <string name="add">Add</string>
+    <string name="add_to_playlist">Add to playlist</string>
+    <string name="choose_playlist">Choose playlist</string>
+    <string name="close">Close</string>
+    <string name="added_to_playlist">Added to playlist</string>
+    <string name="new_playlist">New Playlist</string>
+    <string name="play_caps">PLAY</string>
+    <string name="delete">Delete</string>
+    <string name="cant_play_song">Can\'t play this song</string>
+    <string name="nothing_to_play">Nothing to play</string>
+    <string name="up_next">Up Next</string>
+    <string name="rename">Rename</string>
+    <string name="songs_uppercase">SONGS</string>
+    <string name="api">911da172e486f9339ebc82b65ee89993</string>
+    <string name="artist_fetch_url">http://ws.audioscrobbler.com/2.0/?method=artist.getinfo</string>
+    <string name="dont_leave_blank">Don\'t leave blank</string>
+    <string name="okay">Okay</string>
+    <string name="play_only">Play only</string>
+    <string name="add_playing_queue">Add to playing queue</string>
+    <string name="open_album">Open album</string>
+    <string name="open_artist">Open Artist</string>
+    <string name="share">Share</string>
+    <string name="details">Details</string>
+    <string name="set_as_ringtone">Set as ringtone</string>
+    <string name="delete_from_device">Delete from device</string>
+    <string name="text">Text</string>
+    <string name="file">File</string>
+    <string name="share_song_file">Share Song File</string>
+    <string name="currently_listening_to">Currently listening to&#160;</string>
+    <string name="by">&#160;by&#160;</string>
+    <string name="share_using">Share using</string>
+    <string name="share_as">Share as</string>
+    <string name="song_name"><![CDATA[<b>Song name:&nbsp;</b>]]></string>
+    <string name="album_name"><![CDATA[<b>Album name:&nbsp;</b>]]></string>
+    <string name="artist_name"><![CDATA[<b>Artist Name:&nbsp;</b>]]></string>
+    <string name="file_path"><![CDATA[<b>File Path:&nbsp;</b>]]></string>
+    <string name="file_name"><![CDATA[<b>File name:&nbsp;</b>]]></string>
+    <string name="file_size"><![CDATA[<b>File size:&nbsp;</b>]]></string>
+    <string name="bitrate"><![CDATA[<b>Bitrate:&nbsp;]]></string>
+    <string name="samplingrate"><![CDATA[<b>Sampling Rate:&nbsp;</b>]]></string>
+    <string name="format"><![CDATA[<b>Format:&nbsp;]]></string>
+    <string name="write_setting_permission">Need Write Setting Permission in order to set Ringtone</string>
+    <string name="ringtone_permission_title">Permission Required</string>
+    <string name="ringtone_permission_content">We need Permission to change settings for setting your Ringtone. We will not do anything else!</string>
+    <string name="cancel">Cancel</string>
+    <string name="success">Success</string>
+    <string name="search">Search</string>
+    <string name="cant_proceed">Can\'t Proceed</string>
+    <string name="cant_proceed_msg">Can\'t proceed further to open music player \n As we have not granted all permission required to start player. Would you like to accept those permissions again?</string>
+    <string name="about">About</string>
+    <string name="settings">Settings</string>
+    <string name="music_player">Music Player</string>
+
 
 </resources>

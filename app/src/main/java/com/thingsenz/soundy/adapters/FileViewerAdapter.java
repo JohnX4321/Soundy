@@ -3,14 +3,8 @@ package com.thingsenz.soundy.adapters;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Environment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTransaction;
-import android.app.AlertDialog;
-import android.support.v4.content.FileProvider;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +13,13 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.thingsenz.soundy.DBHelper;
 import com.thingsenz.soundy.R;
@@ -83,6 +84,11 @@ public class FileViewerAdapter extends RecyclerView.Adapter<FileViewerAdapter.Re
 
                     playbackFragment.show(transaction, "dialog_playback");
 
+                    /*Intent intent=new Intent(mContext, WaveformActivity.class);
+                    intent.putExtra("filepath",getItem(holder.getPosition()).getFilePath());
+                    mContext.startActivity(intent);
+*/
+
                 } catch (Exception e) {
                     Log.e(LOG_TAG, "exception", e);
                 }
@@ -108,7 +114,8 @@ public class FileViewerAdapter extends RecyclerView.Adapter<FileViewerAdapter.Re
                     public void onClick(DialogInterface dialog, int item) {
                         if (item == 0) {
                             shareFileDialog(holder.getAdapterPosition());
-                        } if (item == 1) {
+                        }
+                        if (item == 1) {
                             renameFileDialog(holder.getAdapterPosition());
                         } else if (item == 2) {
                             deleteFileDialog(holder.getAdapterPosition());
@@ -230,13 +237,13 @@ public class FileViewerAdapter extends RecyclerView.Adapter<FileViewerAdapter.Re
     public void shareFileDialog(int position) {
         Intent shareIntent = new Intent();
         shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(mContext,mContext.getApplicationContext().getPackageName()+".fileprovider",new File(getItem(position).getFilePath())));
+        shareIntent.putExtra(Intent.EXTRA_STREAM, FileProvider.getUriForFile(mContext, mContext.getApplicationContext().getPackageName() + ".fileprovider", new File(getItem(position).getFilePath())));
         shareIntent.setFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         shareIntent.setType("audio/mp3");
         mContext.startActivity(Intent.createChooser(shareIntent, mContext.getText(R.string.send_to)));
     }
 
-    public void renameFileDialog (final int position) {
+    public void renameFileDialog(final int position) {
         // File rename dialog
         AlertDialog.Builder renameFileBuilder = new AlertDialog.Builder(mContext);
 
@@ -273,7 +280,7 @@ public class FileViewerAdapter extends RecyclerView.Adapter<FileViewerAdapter.Re
         alert.show();
     }
 
-    public void deleteFileDialog (final int position) {
+    public void deleteFileDialog(final int position) {
         // File delete confirm
         AlertDialog.Builder confirmDelete = new AlertDialog.Builder(mContext);
         confirmDelete.setTitle(mContext.getString(R.string.dialog_title_delete));
@@ -305,7 +312,7 @@ public class FileViewerAdapter extends RecyclerView.Adapter<FileViewerAdapter.Re
     }
 
 
-    public class GenericFP extends FileProvider{}
-
+    public class GenericFP extends FileProvider {
+    }
 
 }

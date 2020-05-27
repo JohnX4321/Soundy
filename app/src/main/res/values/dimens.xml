@@ -4,4 +4,40 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="tab_indicator_height">5dp</dimen>
+
+    <dimen name="aar_wave_height">60dp</dimen>
+    <dimen name="aar_bubble_size">30dp</dimen>
+    <dimen name="aar_footer_height">200dp</dimen>
+
+    <dimen name="notification_large_dim">50dp</dimen>
+
+    <dimen name="parallax_image_height">320dp</dimen>
+    <dimen name="parallax_image_height_ancor">360dp</dimen>
+
+    <!-- Bottom control panel-->
+    <dimen name="bottom_control_panel">150dp</dimen>
+
+    <dimen name="grid_view_album_art_height">200dp</dimen>
+    <dimen name="small_sliding_player_height">48.0dip</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="now_playing_seekbar_size">24dp</dimen>
+    <dimen name="now_playing_seekbar_thub_size">2dp</dimen>
+    <dimen name="parallax_img_height">400dp</dimen>
+    <dimen name="parallax_img_height_player">300dp</dimen>
+    <dimen name="parallax_label_bg_height">100dp</dimen>
+    <dimen name="cardview_compat_inset_shadow">1dp</dimen>
+    <dimen name="controller_button_size">28dp</dimen>
+    <dimen name="noti_big_img">130dp</dimen>
+    <dimen name="noti_big_height">130dp</dimen>
+    <dimen name="noti_button_height">45dp</dimen>
+    <dimen name="album_grid_height">180dp</dimen>
+    <dimen name="album_grid_text_panel_height">70dp</dimen>
+    <dimen name="grid_item_title_size">16sp</dimen>
+    <dimen name="grid_item_desc_size">13sp</dimen>
+    <dimen name="volume_icon_size">45dp</dimen>
+    <dimen name="player_song_item_height">75dp</dimen>
+    <dimen name="album_title_height">100dp</dimen>
+
+    <dimen name="appbar_padding_top">8dp</dimen>
+
 </resources>

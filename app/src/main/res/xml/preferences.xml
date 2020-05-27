@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <CheckBoxPreference
         android:key="@string/pref_high_quality_key"
         android:title="@string/pref_high_quality_title"
         android:summary="@string/pref_high_quality_desc"/>
+
+    <SwitchPreference
+        android:key="wav_format"
+        android:title="WAV Format"
+        android:summary="Record in .wav high quality format" />
+
+
+    <ListPreference
+        android:key="@string/theme_key"
+        android:title="Theme"
+        android:defaultValue="@string/dark_mode_def_value"
+        android:entries="@array/dark_mode_entries"
+        android:entryValues="@array/dark_mode_values"
+        />
+
     <Preference
         android:key="@string/pref_about_key"
         android:title="@string/pref_about_title"

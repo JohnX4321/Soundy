@@ -4,23 +4,29 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.astuetz.PagerSlidingTabStrip;
+
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.thingsenz.soundy.R;
 import com.thingsenz.soundy.fragments.FileViewerFragment;
 import com.thingsenz.soundy.fragments.RecordFragment;
+import com.thingsenz.soundy.fragments.SettingsFragment;
+import com.thingsenz.soundy.musicplayer.activities.PlayerActivity;
+import com.thingsenz.soundy.ui.PagerSlidingTabStrip;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +48,10 @@ public class MainActivity extends AppCompatActivity {
         pager.setAdapter(new MyAdapter(getSupportFragmentManager()));
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setViewPager(pager);
+        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO)
+            setTheme(R.style.LightTheme);
+        else
+            setTheme(R.style.DarkTheme);
 
        // android.support.v7.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //toolbar.setPopupTheme(R.style.ThemeOverlay_AppCompat_Light);
@@ -56,8 +66,10 @@ public class MainActivity extends AppCompatActivity {
 
             actionBar.setBackgroundDrawable(new ColorDrawable(this.getApplicationContext().getColor(R.color.primary)));
             actionBar.setHideOffset(0);
+            actionBar.setElevation(0);
 
         }
+        getWindow().setStatusBarColor(ContextCompat.getColor(this,R.color.primary_dark));
 
 
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.RECORD_AUDIO},1);
@@ -97,6 +109,9 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 Intent i = new Intent(this, SettingsActivity.class);
                 startActivity(i);
+                return true;
+            case R.id.action_music_player:
+                startActivity(new Intent(this, PlayerActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

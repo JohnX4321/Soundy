@@ -10,4 +10,49 @@
     <color name="text">#FFFFFF</color>
     <color name="white">#FFFFFF</color>
     <color name="tab_strip">#0aaff1</color>
+    <color name="gray">#808080</color>
+
+    <color name="appBackground">#FAFAFA</color>
+    <color name="cardview_shadow_end_color">#03000000</color>
+    <color name="cardview_shadow_start_color">#47000000</color>
+    <color name="light_grey">#ededed</color>
+    <color name="drawer_item_text_color">#2b2b2b</color>
+
+    <color name="drawable_grey_tint">#434343</color>
+    <color name="album_grid_name_default">#000000</color>
+    <color name="album_grid_artist_default">#9a9a9a</color>
+
+    <color name="seekbar_translusent">#38000000</color>
+
+    <color name="psts_background_tab_pressed">#1AFFFFFF</color>
+    <color name="psts_background_tab_pressed_ripple">#AAFFFFFF</color>
+
+
+    <color name="waveform_selected">#00BFA5</color>
+    <color name="waveform_unselected">#535353</color>
+    <color name="waveform_unselected_bkgnd_overlay">#ffd6d7d7</color>
+    <color name="selection_border">#ffffff</color>
+    <color name="playback_indicator">#ffff66</color>
+    <color name="grid_line">#6D6D6D</color>
+    <color name="timecode">#000000</color>
+    <color name="timecode_shadow">#aa000000</color>
+
+    <color name="colorPrimar2">#FF5722</color>
+    <color name="colorPrimaryDar2">#E64A19</color>
+
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorPrimaryLight">#FFCCBC</color>
+    <color name="colorAccent">#795548</color>
+    <color name="colorPrimaryText">#212121</color>
+    <color name="colorPrimaryTextTab">#212121</color>
+
+    <color name="colorSecondaryText">#757575</color>
+    <color name="colorIcon">#FFFFFF</color>
+    <color name="colorDividor">#BDBDBD</color>
+
+    <color name="background_dark">#ffb8860b</color>
+    <color name="background_light">#ffd2b48c</color>
+    <color name="transparent">#00000000</color>
+
 </resources>

@@ -5,6 +5,14 @@
     tools:context=".activities.MainActivity">
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="101"
-        android:title="@string/action_settings" />
+        android:orderInCategory="200"
+        android:title="@string/action_settings"
+        android:icon="@android:drawable/ic_menu_set_as"
+        android:iconTint="@color/md_black_1000"/>
+    <item
+        android:id="@+id/action_music_player"
+        android:orderInCategory="100"
+        android:icon="@drawable/ic_library_music"
+        app:showAsAction="always"
+        android:title="@string/music_player" />
 </menu>

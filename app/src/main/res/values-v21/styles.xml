@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="AppTheme.Base">
+    <style name="AppTheme" parent="Theme.AppCompat.DayNight">
         <!-- remove action bar, using toolbar -->
 
         <item name="android:windowNoTitle">true</item>
@@ -37,6 +37,18 @@
         <!-- specify enter and exit transitions -->
         <item name="android:windowEnterTransition">@android:transition/explode</item>
         <item name="android:windowExitTransition">@android:transition/explode</item>
+    </style>
+
+    <style name="LightTheme" parent="AppTheme">
+        <item name="textColor">#000000</item>
+        <item name="metaTextColor">#606060</item>
+        <item name="bgColor">#ffffff</item>
+    </style>
+
+    <style name="DarkTheme" parent="AppTheme">
+        <item name="textColor">#ffffff</item>
+        <item name="metaTextColor">#aeaeae</item>
+        <item name="bgColor">#000000</item>
     </style>
 
 </resources>
