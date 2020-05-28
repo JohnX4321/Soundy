@@ -4,11 +4,15 @@
     <style name="AppTheme" parent="AppTheme.Base">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorPrimaryDark">@color/primary_dark</item>
+        <item name="bgColor">#ffffff</item>
 
 
         <item name="android:windowNoTitle">true</item>
 
     </style>
+
+
+
 
 
     <style name="ExpandedTransparent">
@@ -29,7 +33,7 @@
         <item name="android:fontFamily">@font/lato</item>
     </style>
 
-    <style name="AppTheme.NoActionBar" parent="AppThemeMusic">
+    <style name="AppTheme.NoActionBar" parent="AppTheme">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>

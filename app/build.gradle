@@ -1,6 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android-extensions'
-apply plugin: 'kotlin-android'
+//apply plugin: 'kotlin-android-extensions'
+//apply plugin: 'kotlin-android'
 
 android {
     compileSdkVersion 28
@@ -17,8 +17,13 @@ android {
     }*/
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled true
+            shrinkResources true
         }
     }
     compileOptions {
@@ -43,6 +48,8 @@ dependencies {
 
     def preference_version = "1.1.1"
 
+    implementation "com.mikepenz:aboutlibraries:6.2.3"
+
     // Java language implementation
     implementation "androidx.preference:preference:1.0.0"
 
@@ -53,6 +60,8 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.3.2'
 
+    implementation 'com.google.android.exoplayer:exoplayer:2.7.3'
+    implementation 'org.jsoup:jsoup:1.10.3'
     //implementation project(':audiovisualizer')
     implementation 'com.github.squti:Android-Wave-Recorder:1.4.0'
 

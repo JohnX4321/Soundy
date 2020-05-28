@@ -32,6 +32,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
 
     private static final String TAG = MusicService.class.getSimpleName();
     private static final int NOTIFICATION_ID = 12302;
+    public static final String CHANNEL_ID="soundy_channel";
 
     private MediaPlayer player;
     private Song currentSong;
@@ -70,7 +71,7 @@ public class MusicService extends Service implements MediaPlayer.OnPreparedListe
     public int onStartCommand(Intent intent, int flags, int startId) {
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O){
-            mNotificationManager.createNotificationChannel(new NotificationChannel("com.thingsenz.soundy.musicplayer.ID","com.thingsenz.soundy.musicplayer.NAME",NotificationManager.IMPORTANCE_LOW));
+            mNotificationManager.createNotificationChannel(new NotificationChannel(CHANNEL_ID,"com.thingsenz.soundy.musicplayer.NAME",NotificationManager.IMPORTANCE_LOW));
         }
 //        mNotificationManager.notify();
         switch (intent.getAction()) {

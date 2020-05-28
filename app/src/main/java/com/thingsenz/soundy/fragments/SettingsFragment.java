@@ -14,12 +14,14 @@ import androidx.preference.PreferenceFragment;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
+import com.mikepenz.aboutlibraries.Libs;
+import com.mikepenz.aboutlibraries.LibsBuilder;
 import com.thingsenz.soundy.BuildConfig;
 import com.thingsenz.soundy.MySharedPreferences;
 import com.thingsenz.soundy.R;
 import com.thingsenz.soundy.activities.SettingsActivity;
 
-public class SettingsFragment extends PreferenceFragment {
+public class SettingsFragment extends PreferenceFragmentCompat {
 
 
     public static SettingsFragment newInstance(int position) {
@@ -83,8 +85,12 @@ public class SettingsFragment extends PreferenceFragment {
         aboutPref.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
             @Override
             public boolean onPreferenceClick(Preference preference) {
-                LicensesFragment licensesFragment = new LicensesFragment();
-                licensesFragment.show(((SettingsActivity)getActivity()).getSupportFragmentManager().beginTransaction(), "dialog_licenses");
+                //LicensesFragment licensesFragment = new LicensesFragment();
+                //licensesFragment.show(((SettingsActivity)getActivity()).getSupportFragmentManager().beginTransaction(), "dialog_licenses");
+                new LibsBuilder()
+                        .withActivityStyle(Libs.ActivityStyle.LIGHT)
+                        .withActivityTitle("Open Source Licenses")
+                        .start(requireActivity());
                 return true;
             }
         });

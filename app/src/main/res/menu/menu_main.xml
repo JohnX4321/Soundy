@@ -15,4 +15,12 @@
         android:icon="@drawable/ic_library_music"
         app:showAsAction="always"
         android:title="@string/music_player" />
+
+    <item
+        android:id="@+id/action_video_streamer"
+        android:orderInCategory="150"
+        android:title="@string/video_stream"
+        android:icon="@android:drawable/presence_video_online"
+        />
+
 </menu>

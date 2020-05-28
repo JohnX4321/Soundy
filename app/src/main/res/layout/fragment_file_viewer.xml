@@ -3,11 +3,11 @@
     android:id="@+id/fragment_file_viewer"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/bgColor"
     tools:context="com.thingsenz.soundy.activities.MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
+        android:background="?attr/bgColor"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

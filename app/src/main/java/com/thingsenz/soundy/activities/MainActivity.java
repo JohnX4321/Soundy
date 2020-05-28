@@ -27,6 +27,7 @@ import com.thingsenz.soundy.fragments.RecordFragment;
 import com.thingsenz.soundy.fragments.SettingsFragment;
 import com.thingsenz.soundy.musicplayer.activities.PlayerActivity;
 import com.thingsenz.soundy.ui.PagerSlidingTabStrip;
+import com.thingsenz.soundy.videostreaming.VSActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,10 +49,11 @@ public class MainActivity extends AppCompatActivity {
         pager.setAdapter(new MyAdapter(getSupportFragmentManager()));
         tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
         tabs.setViewPager(pager);
-        if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO)
+        /*if (AppCompatDelegate.getDefaultNightMode()==AppCompatDelegate.MODE_NIGHT_NO)
             setTheme(R.style.LightTheme);
         else
-            setTheme(R.style.DarkTheme);
+            setTheme(R.style.DarkTheme);*/
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.getDefaultNightMode());
 
        // android.support.v7.widget.Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //toolbar.setPopupTheme(R.style.ThemeOverlay_AppCompat_Light);
@@ -112,6 +114,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.action_music_player:
                 startActivity(new Intent(this, PlayerActivity.class));
+                return true;
+            case R.id.action_video_streamer:
+                startActivity(new Intent(this, VSActivity.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

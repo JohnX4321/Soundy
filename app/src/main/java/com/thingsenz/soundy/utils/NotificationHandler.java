@@ -49,7 +49,7 @@ public class NotificationHandler {
 
         Bitmap bitmap=getBitmap(context,currSong.getAlbumArt());
 
-        builder=new NotificationCompat.Builder(context,"com.thingsenz.soundy")
+        builder=new NotificationCompat.Builder(context,MusicService.CHANNEL_ID)
         .setContentTitle(currSong.getTitle()).setTicker(currSong.getTitle())
         .setContentText(currSong.getAlbumName()).setSmallIcon(R.drawable.music_icon).setContentIntent(pendingOAIntent)
         .setOngoing(true).setLargeIcon(bitmap).addAction(android.R.drawable.ic_media_previous,"Previous",pprevInt);
@@ -59,6 +59,8 @@ public class NotificationHandler {
             builder.addAction(android.R.drawable.ic_media_play,"Pause",pplayInt);
         builder.addAction(android.R.drawable.ic_media_next,"Next",pnextIntent).setLargeIcon(bitmap);
         builder.setStyle(new androidx.media.app.NotificationCompat.MediaStyle());
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+            builder.setChannelId(MusicService.CHANNEL_ID);
 
         return builder.build();
 
